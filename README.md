@@ -1,0 +1,1 @@
+# TechnicalTestApi.Domain
