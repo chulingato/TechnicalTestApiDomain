@@ -18,7 +18,7 @@ namespace TechnicalTestApi.Infrastructure.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = ApiRestDb; Integrated Security = true;");
+            optionsBuilder.UseSqlServer($"Data Source=localhost;Initial Catalog=ApiDb;User ID=sa;Password=Admin123@; Encrypt=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

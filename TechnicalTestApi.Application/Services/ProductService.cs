@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TechnicalTestApi.Domain;
-using TechnicalTestApi.Domain.Interfaces;
 using TechnicalTestApi.Application.Interfaces;
 using TechnicalTestApi.Domain.Interfaces.Repositories;
 

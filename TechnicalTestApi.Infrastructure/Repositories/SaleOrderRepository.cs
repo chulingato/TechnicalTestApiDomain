@@ -21,7 +21,7 @@ namespace TechnicalTestApi.Infrastructure.Repositories
         public SaleOrder Add(SaleOrder entity)
         {
             entity.saleOrderId = Guid.NewGuid();
-            _saleOrderContextDb.Add(entity);
+            _saleOrderContextDb.SaleOrders.Add(entity);
             return entity;
         }
 

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace TechnicalTestApi.Domain
 {
@@ -14,7 +15,9 @@ namespace TechnicalTestApi.Domain
         public decimal cost { get; set; }
         public decimal price { get; set; }
         public decimal stock { get; set; }
-        public List<SaleOrderDetail> saleOrderDetail { get; set; }
+        [JsonIgnore]
+        public List<SaleOrderDetail>? saleOrderDetail { get; set; }
+        //public virtual ICollection<SaleOrderDetail> saleOrderDetail { get; set; }
 
     }
 }

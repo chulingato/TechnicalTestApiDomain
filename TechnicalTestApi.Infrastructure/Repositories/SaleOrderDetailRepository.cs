@@ -20,7 +20,7 @@ namespace TechnicalTestApi.Infrastructure.Repositories
         }
         public SaleOrderDetail Add(SaleOrderDetail entity)
         {
-            _saleOrderContextDb.Add(entity);
+            _saleOrderContextDb.SaleOrdersDetail.Add(entity);
             return entity;
         }
 

@@ -22,7 +22,7 @@ namespace TechnicalTestApi.Infrastructure.Repositories
         public Product Add(Product entity)
         {
             entity.productId = Guid.NewGuid();
-            _saleOrderContextDb.Add(entity);
+            _saleOrderContextDb.Products.Add(entity);
             return entity;
         }
 
