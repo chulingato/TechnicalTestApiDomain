@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnicalTestApi.Domain", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnicalTestApi.Application", "TechnicalTestApi.Application\TechnicalTestApi.Application.csproj", "{613B036C-74F8-4CC6-A301-D256D19BD090}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnicalTestApi.Infrastructure", "TechnicalTestApi.Infrastructure\TechnicalTestApi.Infrastructure.csproj", "{B0663FEA-98FF-4DF1-B3C5-776C0AD5F3BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{613B036C-74F8-4CC6-A301-D256D19BD090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{613B036C-74F8-4CC6-A301-D256D19BD090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{613B036C-74F8-4CC6-A301-D256D19BD090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0663FEA-98FF-4DF1-B3C5-776C0AD5F3BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0663FEA-98FF-4DF1-B3C5-776C0AD5F3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0663FEA-98FF-4DF1-B3C5-776C0AD5F3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0663FEA-98FF-4DF1-B3C5-776C0AD5F3BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

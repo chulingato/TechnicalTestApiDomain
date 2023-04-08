@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.EntityFrameworkCore;
+using TechnicalTestApi.Domain;
+using TechnicalTestApi.Infrastructure.Configs;
+
+namespace TechnicalTestApi.Infrastructure.Contexts
+{
+    public class SaleOrderContext : DbContext
+    {
+        public DbSet<Product> Products { get; set; }
+        public DbSet<SaleOrder> SaleOrders { get; set; }
+        public DbSet<SaleOrderDetail> SaleOrdersDetail { get; set;}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = ApiRestDb; Integrated Security = true;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new ProductConfig());
+            modelBuilder.ApplyConfiguration(new SaleOrderConfig());
+            modelBuilder.ApplyConfiguration(new SaleOrderDetailConfig());
+        }
+    }
+}

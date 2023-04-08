@@ -15,6 +15,7 @@ namespace TechnicalTestApi.Domain
         public decimal subtotal { get; set; }
         public decimal tax { get; set; }
         public decimal total { get; set; }
+        public Boolean annulled { get; set; } = false;
         public List<SaleOrderDetail> saleOrderDetail { get; set; }
     }
 }
