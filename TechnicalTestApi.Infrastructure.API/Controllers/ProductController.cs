@@ -40,20 +40,33 @@ namespace TechnicalTestApi.Infrastructure.API.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Product product)
         {
-            var service = createService();
-            service.Add(product);
-            return Ok("Producto Agregado!");
+            try {
+                var service = createService();
+                service.Add(product);
+
+                return Ok("Producto Agregado!");
+            }catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
         }
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
         public ActionResult Put(Guid id, [FromBody] Product product)
         {
-            var service = createService();
-            product.productId = id;
-            service.Edit(product);
-            return Ok("Producto Editado.");
-        }
+            try { 
+                var service = createService();
+                product.productId = id;
+                service.Edit(product);
+
+                return Ok("Producto Editado.");
+             }catch (Exception e)
+            {
+                return BadRequest(e.Message);
+             }
+}
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]

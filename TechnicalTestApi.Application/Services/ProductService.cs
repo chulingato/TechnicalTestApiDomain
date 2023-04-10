@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using TechnicalTestApi.Domain;
 using TechnicalTestApi.Application.Interfaces;
 using TechnicalTestApi.Domain.Interfaces.Repositories;
+using TechnicalTestApi.Application.Validators;
+using FluentValidation;
 
 namespace TechnicalTestApi.Application.Services
 {
@@ -22,6 +24,16 @@ namespace TechnicalTestApi.Application.Services
         {
             if (entity == null) throw new ArgumentNullException("El producto es requerido");
 
+            // Valida la entidad antes de agregar
+            ProductValidator validator = new ProductValidator();
+            validator.ValidateAndThrow(entity);
+          /*  var validationResult = validator.Validate(entity);
+            if (!validationResult.IsValid)
+            {
+                throw new ArgumentNullException("nombre es requerido");
+            }*/
+
+
             var productObtained = _baseRepository.Add(entity);
             _baseRepository.SaveAllChanges();
             return productObtained;
@@ -36,6 +48,9 @@ namespace TechnicalTestApi.Application.Services
         public void Edit(Product entity)
         {
             if (entity == null) throw new ArgumentNullException("El producto es requerido");
+            
+            ProductValidator validator = new ProductValidator();
+            validator.ValidateAndThrow(entity);
 
             _baseRepository.Edit(entity);
             _baseRepository.SaveAllChanges();
