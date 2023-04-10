@@ -39,24 +39,20 @@ namespace TechnicalTestApi.Application.Services
                 if (productSelected == null)
                     throw new NullReferenceException("para esta venta, el producto no existe");
 
-                var newSaleOrderDetail = new SaleOrderDetail();
-                newSaleOrderDetail.saleOrderId = saleOrderAdded.saleOrderId;
-                newSaleOrderDetail.productId = orderDetail.productId;
-                newSaleOrderDetail.unitaryCost = productSelected.cost;
-                newSaleOrderDetail.unitaryPrice = productSelected.price;
-                newSaleOrderDetail.quantity = orderDetail.quantity;
-                newSaleOrderDetail.subtotal = newSaleOrderDetail.unitaryPrice * newSaleOrderDetail.quantity;
-                newSaleOrderDetail.tax = newSaleOrderDetail.subtotal * 13 / 100;
-                newSaleOrderDetail.total = newSaleOrderDetail.subtotal + newSaleOrderDetail.tax;
-                _saleOrderDetailRepository.Add(newSaleOrderDetail);
+                orderDetail.unitaryCost = productSelected.cost;
+                orderDetail.unitaryPrice = productSelected.price;
+                orderDetail.subtotal = orderDetail.unitaryPrice * orderDetail.quantity;
+                orderDetail.tax = orderDetail.subtotal * 13 / 100;
+                orderDetail.total = orderDetail.subtotal + orderDetail.tax;
+                _saleOrderDetailRepository.Add(orderDetail);
 
                 //actualizamos stock
-                productSelected.stock -= newSaleOrderDetail.quantity;
+                productSelected.stock -= orderDetail.quantity;
                 _productRepository.Edit(productSelected);
 
-                entity.subtotal += newSaleOrderDetail.subtotal;
-                entity.tax += newSaleOrderDetail.tax;
-                entity.total += newSaleOrderDetail.total;
+                entity.subtotal += orderDetail.subtotal;
+                entity.tax += orderDetail.tax;
+                entity.total += orderDetail.total;
             });
             _saleOrderRepository.SaveAllChanges();
             return entity;
