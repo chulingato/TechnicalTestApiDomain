@@ -27,12 +27,6 @@ namespace TechnicalTestApi.Application.Services
             // Valida la entidad antes de agregar
             ProductValidator validator = new ProductValidator();
             validator.ValidateAndThrow(entity);
-          /*  var validationResult = validator.Validate(entity);
-            if (!validationResult.IsValid)
-            {
-                throw new ArgumentNullException("nombre es requerido");
-            }*/
-
 
             var productObtained = _baseRepository.Add(entity);
             _baseRepository.SaveAllChanges();

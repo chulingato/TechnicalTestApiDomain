@@ -16,15 +16,19 @@ namespace TechnicalTestApi.Application.Services
         ISaleOrderRepository<SaleOrder, Guid> _saleOrderRepository;
         IBaseRepository<Product, Guid> _productRepository;
         ISaleOrderDetailRepository<SaleOrderDetail, Guid> _saleOrderDetailRepository;
+        IBaseConfigurationRepository<Configuration, string> _configurationRepository;
 
         public SaleOrderService(
         ISaleOrderRepository<SaleOrder, Guid> saleOrderRepository,
         IBaseRepository<Product, Guid> productRepository,
-        ISaleOrderDetailRepository<SaleOrderDetail,Guid> saleOrderDetailRepository)
+        ISaleOrderDetailRepository<SaleOrderDetail,Guid> saleOrderDetailRepository,
+        IBaseConfigurationRepository<Configuration,string> configurationRepository)
+
         { 
             _saleOrderDetailRepository = saleOrderDetailRepository;
             _productRepository = productRepository;
             _saleOrderRepository = saleOrderRepository;
+            _configurationRepository = configurationRepository;
         }
 
         public SaleOrder Add(SaleOrder entity)
@@ -32,17 +36,24 @@ namespace TechnicalTestApi.Application.Services
             if (entity == null) throw new ArgumentNullException("La venta es requerida");
 
             var saleOrderAdded = _saleOrderRepository.Add(entity);
+            Configuration ivaConfig = _configurationRepository.GetBykey("IVA");
+           
+            if(ivaConfig == null) throw new ArgumentNullException("La configuracion del IVA es requerida");
+            decimal iva;
+            decimal.TryParse(ivaConfig.value, out iva);
 
             entity.saleOrderDetail.ForEach(orderDetail =>
             {
                 var productSelected = _productRepository.GetById(orderDetail.productId);
                 if (productSelected == null)
                     throw new NullReferenceException("para esta venta, el producto no existe");
+                if (productSelected.stock < orderDetail.quantity)
+                    throw new NullReferenceException("no existe stock para el producto");
 
                 orderDetail.unitaryCost = productSelected.cost;
                 orderDetail.unitaryPrice = productSelected.price;
                 orderDetail.subtotal = orderDetail.unitaryPrice * orderDetail.quantity;
-                orderDetail.tax = orderDetail.subtotal * 13 / 100;
+                orderDetail.tax = orderDetail.subtotal * iva  / 100;
                 orderDetail.total = orderDetail.subtotal + orderDetail.tax;
                 _saleOrderDetailRepository.Add(orderDetail);
 

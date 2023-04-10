@@ -7,8 +7,7 @@ using TechnicalTestApi.Domain.Interfaces;
 
 namespace TechnicalTestApi.Application.Interfaces
 {
-    public interface IBaseService<TEntity, TEntityId>
-        :IAdd<TEntity>, IEdit<TEntity>, IDelete<TEntityId>, IList<TEntity,TEntityId>
+    internal interface IBaseConfigurationService<TEntity, TEntityKey> : IListKey<TEntity, TEntityKey>
     {
     }
 }

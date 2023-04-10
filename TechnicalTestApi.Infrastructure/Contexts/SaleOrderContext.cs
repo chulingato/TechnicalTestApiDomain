@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TechnicalTestApi.Domain;
 using TechnicalTestApi.Infrastructure.Configs;
+using TechnicalTestApi.Infrastructure.Data.Configs;
 
 namespace TechnicalTestApi.Infrastructure.Contexts
 {
@@ -15,6 +16,8 @@ namespace TechnicalTestApi.Infrastructure.Contexts
         public DbSet<Product> Products { get; set; }
         public DbSet<SaleOrder> SaleOrders { get; set; }
         public DbSet<SaleOrderDetail> SaleOrdersDetail { get; set;}
+
+        public DbSet<Configuration> Configuration { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,6 +30,7 @@ namespace TechnicalTestApi.Infrastructure.Contexts
             modelBuilder.ApplyConfiguration(new ProductConfig());
             modelBuilder.ApplyConfiguration(new SaleOrderConfig());
             modelBuilder.ApplyConfiguration(new SaleOrderDetailConfig());
+            modelBuilder.ApplyConfiguration(new ConfigurationConfig());
         }
     }
 }
