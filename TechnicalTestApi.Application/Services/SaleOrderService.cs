@@ -23,7 +23,6 @@ namespace TechnicalTestApi.Application.Services
         IBaseRepository<Product, Guid> productRepository,
         ISaleOrderDetailRepository<SaleOrderDetail,Guid> saleOrderDetailRepository,
         IBaseConfigurationRepository<Configuration,string> configurationRepository)
-
         { 
             _saleOrderDetailRepository = saleOrderDetailRepository;
             _productRepository = productRepository;
@@ -35,10 +34,12 @@ namespace TechnicalTestApi.Application.Services
         {
             if (entity == null) throw new ArgumentNullException("La venta es requerida");
 
-            var saleOrderAdded = _saleOrderRepository.Add(entity);
             Configuration ivaConfig = _configurationRepository.GetBykey("IVA");
-           
-            if(ivaConfig == null) throw new ArgumentNullException("La configuracion del IVA es requerida");
+
+            if (ivaConfig == null) throw new ArgumentNullException("La configuracion del IVA es requerida");
+
+            var saleOrderAdded = _saleOrderRepository.Add(entity);
+            
             decimal iva;
             decimal.TryParse(ivaConfig.value, out iva);
 

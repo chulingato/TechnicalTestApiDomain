@@ -8,7 +8,7 @@ namespace TechnicalTestApi.Domain
 {
     public class Configuration
     {
-        public Guid configurationId {get; set;} 
+        public int configurationId {get; set;} 
         public string key { get; set;}  
         public string value { get; set;}
     }

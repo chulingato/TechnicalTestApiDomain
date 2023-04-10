@@ -15,6 +15,13 @@ namespace TechnicalTestApi.Infrastructure.Data.Configs
         {
             builder.ToTable("configurations");
             builder.HasKey(c => c.configurationId);
+            builder.HasData(
+                new Configuration
+                {
+                    configurationId = 1,
+                    key = "IVA",
+                    value = "13"
+                });
         }
     }
 }
